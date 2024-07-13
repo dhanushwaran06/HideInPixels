@@ -36,12 +36,17 @@ def index():
 @app.route("/encode", methods=["GET", "POST"])
 def encode():
     if request.method == "POST":
-        if "image" not in request.files or "message" not in request.form:
-            flash("No file part or message found")
+        if (
+            "image" not in request.files
+            or "message" not in request.form
+            or "key" not in request.form
+        ):
+            flash("No file, message, or key found")
             return redirect(request.url)
 
         image_file = request.files["image"]
         message = request.form["message"]
+        key = request.form["key"]
 
         if image_file.filename == "":
             flash("No selected file")
@@ -52,7 +57,7 @@ def encode():
             image_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
             image_file.save(image_path)
 
-            encoded_image_path = encode_message(image_path, message)
+            encoded_image_path = encode_message(image_path, message, key)
 
             return redirect(
                 url_for(
@@ -68,11 +73,12 @@ def encode():
 @app.route("/decode", methods=["GET", "POST"])
 def decode():
     if request.method == "POST":
-        if "image" not in request.files:
-            flash("No file part")
+        if "image" not in request.files or "key" not in request.form:
+            flash("No file or key found")
             return redirect(request.url)
 
         image_file = request.files["image"]
+        key = request.form["key"]
 
         if image_file.filename == "":
             flash("No selected file")
@@ -83,11 +89,18 @@ def decode():
             image_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
             image_file.save(image_path)
 
-            decoded_message = decode_message(image_path)
+            decoded_message = decode_message(image_path, key)
 
-            return render_template(
-                "result.html", filename=filename, mode="decode", message=decoded_message
-            )
+            if decoded_message is not None:
+                return render_template(
+                    "result.html",
+                    filename=filename,
+                    mode="decode",
+                    message=decoded_message,
+                )
+            else:
+                flash("Incorrect key or no message found in image")
+                return redirect(request.url)
 
     return render_template("decode.html")
 

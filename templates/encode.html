@@ -3,30 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Encode Message</title>
+    <title>Encode</title>
   </head>
   <body>
-    <h1>Encode Message</h1>
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
+    <h1>Encode Message into Image</h1>
     <form
-      method="POST"
-      enctype="multipart/form-data"
-      action="{{ url_for('encode') }}">
-      <input type="file" name="image" accept="image/png, image/jpeg" />
-      <br /><br />
-      <textarea
-        name="message"
-        rows="4"
-        cols="50"
-        placeholder="Enter your message"></textarea>
-      <br /><br />
+      action="{{ url_for('encode') }}"
+      method="post"
+      enctype="multipart/form-data">
+      <label for="image">Select image:</label>
+      <input type="file" name="image" id="image" required />
+      <br />
+      <label for="message">Message:</label>
+      <textarea name="message" id="message" required></textarea>
+      <br />
+      <label for="key">Key:</label>
+      <input type="text" name="key" id="key" required />
+      <br />
       <input type="submit" value="Encode" />
     </form>
+    <br />
+    <a href="{{ url_for('index') }}">Back to Home</a>
   </body>
 </html>

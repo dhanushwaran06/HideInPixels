@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Decode Message</title>
-  </head>
-  <body>
-    <h1>Decode Message</h1>
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
-    <form
-      method="POST"
-      enctype="multipart/form-data"
-      action="{{ url_for('decode') }}">
-      <input type="file" name="image" accept="image/png, image/jpeg" />
-      <br /><br />
-      <input type="submit" value="Decode" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decode</title>
+</head>
+<body>
+    <h1>Decode Message from Image</h1>
+    <form action="{{ url_for('decode') }}" method="post" enctype="multipart/form-data">
+        <label for="image">Select image:</label>
+        <input type="file" name="image" id="image" required>
+        <br>
+        <label for="key">Key:</label>
+        <input type="text" name="key" id="key" required>
+        <br>
+        <input type="submit" value="Decode">
     </form>
-  </body>
+    <br>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
 </html>
