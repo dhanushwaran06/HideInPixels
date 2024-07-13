@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encode Message</title>
+  </head>
+  <body>
+    <h1>Encode Message</h1>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <form
+      method="POST"
+      enctype="multipart/form-data"
+      action="{{ url_for('encode') }}">
+      <input type="file" name="image" accept="image/png, image/jpeg" />
+      <br /><br />
+      <textarea
+        name="message"
+        rows="4"
+        cols="50"
+        placeholder="Enter your message"></textarea>
+      <br /><br />
+      <input type="submit" value="Encode" />
+    </form>
+  </body>
+</html>
