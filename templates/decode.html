@@ -1,22 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decode</title>
-</head>
-<body>
-    <h1>Decode Message from Image</h1>
-    <form action="{{ url_for('decode') }}" method="post" enctype="multipart/form-data">
-        <label for="image">Select image:</label>
-        <input type="file" name="image" id="image" required>
-        <br>
-        <label for="key">Key:</label>
-        <input type="text" name="key" id="key" required>
-        <br>
-        <input type="submit" value="Decode">
-    </form>
-    <br>
-    <a href="{{ url_for('index') }}">Back to Home</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decode Message</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+      body {
+        padding-top: 5rem;
+      }
+      .container {
+        max-width: 600px;
+      }
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="{{ url_for('index') }}"
+        >Steganography App</a
+      >
+    </nav>
+    <div class="container">
+      <h1 class="text-center">Decode Message from Image</h1>
+      <form
+        action="{{ url_for('decode') }}"
+        method="post"
+        enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="image">Select Image:</label>
+          <input
+            type="file"
+            class="form-control-file"
+            name="image"
+            id="image"
+            required />
+        </div>
+        <div class="form-group">
+          <label for="key">Key:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="key"
+            id="key"
+            required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Decode</button>
+      </form>
+      <br />
+      <a href="{{ url_for('index') }}" class="btn btn-secondary btn-block"
+        >Back to Home</a
+      >
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 </html>
