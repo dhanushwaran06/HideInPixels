@@ -13,3 +13,10 @@ StegoWeb is a web-based application that allows users to embed and extract hidde
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Python, Flask
 - **Libraries**: Pillow for image processing, Stegano for steganography
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/StegoWeb.git
+   cd StegoWeb
