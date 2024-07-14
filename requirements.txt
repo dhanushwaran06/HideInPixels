@@ -1,0 +1,5 @@
+Flask==2.0.1
+Flask-Bootstrap==3.3.7.1
+Werkzeug==2.0.1
+stegano==0.1.4
+gunicorn==20.1.0
